@@ -55,11 +55,11 @@ filtered_df = df[
 st.subheader("Filtered Data Table")
 st.dataframe(filtered_df)
 # =====================================
-# Applications Ready for Review (new page)
+# Step 1: Applications Ready for Review (new page)
 # =====================================
 st.subheader("Applications Ready for Review")
-# Filter the dataset to include only rows where 'Signed?' equals 'Yes'
-ready_apps = filtered_df[filtered_df["Signed?"] == "Yes"]
+# Filter the dataset to include only rows where 'Application Signed?' equals 'Yes'
+ready_apps = filtered_df[filtered_df["Application Signed?"] == "Yes"]
 # Display the total count of ready applications
 st.write(f"Total Ready Applications: {len(ready_apps)}")
 # Display the filtered dataset in a table format
