@@ -119,6 +119,37 @@ st.write(f"Total Amount Granted: ${total_amount:,.2f}")
 st.write(f"Total Unique Patients: {unique_patients}")
 st.write(f"Average Grant per Patient: ${avg_grant:,.2f}")
 
+# =====================================
+# Step 5: Time to Support Analysis
+# =====================================
+st.subheader("Time to Support Analysis")
+# Ensure the date columns are in datetime format
+filtered_df["Grant Req Date"] = pd.to_datetime(filtered_df["Grant Req Date"], errors='coerce')
+filtered_df["Payment Submitted?"] = pd.to_datetime(filtered_df["Payment Submitted?"], errors='coerce')  # Use the correct column
+# Filter out rows with missing Grant Req Date or Payment Submitted? values
+support_df = filtered_df.dropna(subset=["Grant Req Date", "Payment Submitted?"])
+# Create a new column: Time taken to provide support
+support_df["Days to Support"] = (support_df["Payment Submitted?"] - support_df["Grant Req Date"]).dt.days
+# Optional: Remove negative values (if any)
+support_df = support_df[support_df["Days to Support"] >= 0]
+# Calculate key statistics
+total_requests = len(support_df)
+avg_days = support_df["Days to Support"].mean()
+min_days = support_df["Days to Support"].min()
+max_days = support_df["Days to Support"].max()
+# Display statistics
+st.write(f"Total Records with Payment Date: {total_requests}")
+st.write(f"Average Time to Support: {avg_days:.2f} days")
+st.write(f"Fastest Time to Support: {min_days} days")
+st.write(f"Slowest Time to Support: {max_days} days")
+# Create and display the distribution plot
+fig_time = px.histogram(
+    support_df,
+    x="Days to Support",
+    nbins=30,
+    title="Distribution of Time to Support (Days)"
+)
+st.plotly_chart(fig_time)
 
 
 
