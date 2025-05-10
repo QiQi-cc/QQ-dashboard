@@ -77,7 +77,7 @@ fig_demo = px.bar(
     support_by_demo,
     x="Pt State",
     y="Amount",
-    color="Patient Gender",
+    color="Gender",
     title="Total Support by State and Gender"
 )
 # Display the chart
