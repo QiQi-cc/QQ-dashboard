@@ -88,8 +88,8 @@ st.plotly_chart(fig_demo)
 # ========================================
 # Add a new section for applications that are ready for review
 st.subheader("Applications Ready for Review")
-# Filter the dataset to only include applications where the 'Signed?' field is 'Yes'
-ready_apps = filtered_df[filtered_df["Signed?"] == "Yes"]
+# Filter the dataset to only include applications where the 'Application Signed?' field is 'Yes'
+ready_apps = filtered_df[filtered_df["Application Signed?"] == "Yes"]
 # Display the total number of ready applications
 st.write(f"Total Ready Applications: {len(ready_apps)}")
 # Display the list of ready applications in a table
