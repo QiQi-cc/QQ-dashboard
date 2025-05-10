@@ -56,17 +56,6 @@ st.subheader("Filtered Data Table")
 st.dataframe(filtered_df)
 
 #==========================================================================================================================
-# Step 0: Handle Missing Data
-# ============================
-# Replace missing values in relevant columns with "unknown"
-filtered_df['Gender'].fillna('unknown', inplace=True)
-filtered_df['Pt State'].fillna('unknown', inplace=True)
-filtered_df['Remaining Balance'].fillna(0, inplace=True)
-# Show filtered data table after handling missing values
-st.subheader("Filtered Data Table")
-st.dataframe(filtered_df)
-
-# =====================================
 # Step 1: Total Support by State and Gender
 # =====================================
 # Add a subheader for this section
