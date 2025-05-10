@@ -116,6 +116,8 @@ st.subheader("Impact Summary for the Past 12 Months")
 filtered_df["Grant Req Date"] = pd.to_datetime(filtered_df["Grant Req Date"], errors='coerce')
 # Filter records where Grant Req Date is within the past 12 months
 recent_12_months = filtered_df[filtered_df["Grant Req Date"] >= (pd.Timestamp.now() - pd.DateOffset(months=12))]
+# To numeric
+recent_12_months["Amount"] = pd.to_numeric(recent_12_months["Amount"], errors='coerce')
 # Calculate summary metrics for the filtered data
 total_requests = len(recent_12_months)
 total_amount = recent_12_months["Amount"].sum()
