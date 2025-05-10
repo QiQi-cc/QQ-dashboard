@@ -10,9 +10,26 @@ import plotly.express as px
 
 # Set page configuration
 st.set_page_config(page_title="Hope Foundation Dashboard", layout="wide")
+# ====================
+# Add dark theme
+# ====================
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #0E1117;
+        color: #FFFFFF;
+    }
+    .stApp {
+        background-color: #0E1117;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 
 # Load data
-# Make sure cleaned_hope_data.csv exists in your GitHub repo
 df = pd.read_csv("cleaned_hope_data.csv")
 # Clean Pt State values
 df["Pt State"] = df["Pt State"].astype(str).str.upper().str.strip()
