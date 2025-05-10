@@ -8,6 +8,9 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+import plotly.io as pio # set up plotly template
+pio.templates.default = "plotly_dark"  # apply dark theme to all plotly charts
+
 # Set page configuration
 st.set_page_config(page_title="Hope Foundation Dashboard", layout="wide")
 # ====================
