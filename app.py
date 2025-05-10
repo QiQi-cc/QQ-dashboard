@@ -54,6 +54,20 @@ filtered_df = df[
 # Show filtered data table
 st.subheader("Filtered Data Table")
 st.dataframe(filtered_df)
+# =====================================
+# Applications Ready for Review (new page)
+# =====================================
+st.subheader("Applications Ready for Review")
+
+# Filter the dataset to include only rows where 'Signed?' equals 'Yes'
+ready_apps = filtered_df[filtered_df["Signed?"] == "Yes"]
+
+# Display the total count of ready applications
+st.write(f"Total Ready Applications: {len(ready_apps)}")
+
+# Display the filtered dataset in a table format
+st.dataframe(ready_apps)
+
 
 # Plot 1: Amount by State
 st.subheader("Total Grant Amount by State")
