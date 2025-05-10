@@ -14,6 +14,9 @@ st.set_page_config(page_title="Hope Foundation Dashboard", layout="wide")
 # Load data
 # Make sure cleaned_hope_data.csv exists in your GitHub repo
 df = pd.read_csv("cleaned_hope_data.csv")
+# Clean Pt State values
+df["Pt State"] = df["Pt State"].astype(str).str.upper().str.strip()
+df["Pt State"] = df["Pt State"].replace("NONE", "UNKNOWN")
 
 # Title
 st.title("Hope Foundation Patient Assistance Dashboard")
