@@ -8,45 +8,9 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-import plotly.io as pio # set up plotly template
-pio.templates.default = "plotly_dark"  # apply dark theme to all plotly charts
 
 # Set page configuration
 st.set_page_config(page_title="Hope Foundation Dashboard", layout="wide")
-# ====================
-# Add dark theme
-# ====================
-st.markdown(
-    """
-    <style>
-    body {
-        background-color: #0E1117;
-        color: #FFFFFF;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    .stApp {
-        background-color: #0E1117;
-    }
-    h1, h2, h3 {
-        color: #3399FF;
-    }
-    .stButton button {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 0.5em 1em;
-        font-size: 1em;
-        cursor: pointer;
-    }
-    .stButton button:hover {
-        background-color: #45a049;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 
 
 # Load data
