@@ -70,8 +70,8 @@ st.dataframe(ready_apps)
 # =====================================
 # Add a subheader for this section
 st.subheader("Total Support by State and Gender")
-# Group the data by Pt State and Patient Gender, and sum the Amount
-support_by_demo = filtered_df.groupby(["Pt State", "Patient Gender"])["Amount"].sum().reset_index()
+# Group the data by Pt State and Gender, and sum the Amount
+support_by_demo = filtered_df.groupby(["Pt State", "Gender"])["Amount"].sum().reset_index()
 # Create a bar chart showing total support by demographic groups
 fig_demo = px.bar(
     support_by_demo,
