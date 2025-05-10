@@ -54,19 +54,9 @@ filtered_df = df[
 # Show filtered data table
 st.subheader("Filtered Data Table")
 st.dataframe(filtered_df)
-# =====================================
-# Step 1: Applications Ready for Review (new page)
-# =====================================
-st.subheader("Applications Ready for Review")
-# Filter the dataset to include only rows where 'Application Signed?' equals 'Yes'
-ready_apps = filtered_df[filtered_df["Application Signed?"] == "Yes"]
-# Display the total count of ready applications
-st.write(f"Total Ready Applications: {len(ready_apps)}")
-# Display the filtered dataset in a table format
-st.dataframe(ready_apps)
 
 # =====================================
-# Step 2: Total Support by State and Gender
+# Step 1: Total Support by State and Gender
 # =====================================
 # Add a subheader for this section
 st.subheader("Total Support by State and Gender")
@@ -84,7 +74,7 @@ fig_demo = px.bar(
 st.plotly_chart(fig_demo)
 
 # ========================================
-# Step 3: Applications Ready for Review Page
+# Step 2: Applications Ready for Review Page
 # ========================================
 # Add a new section for applications that are ready for review
 st.subheader("Applications Ready for Review")
@@ -96,7 +86,7 @@ st.write(f"Total Ready Applications: {len(ready_apps)}")
 st.dataframe(ready_apps)
 
 # ========================================
-# Step 4: Patients Who Did Not Use Full Grant Amount
+# Step 3: Patients Who Did Not Use Full Grant Amount
 # ========================================
 # Add a subheader for this section
 st.subheader("Patients Who Did Not Use Full Grant Amount")
@@ -108,7 +98,7 @@ st.write(f"Total Patients with Unused Grant Funds: {len(not_used_full)}")
 st.dataframe(not_used_full)
 
 # ========================================
-# Step 5: Impact Summary for Past 12 Months
+# Step 4: Impact Summary for Past 12 Months
 # ========================================
 # Add a subheader for this section
 st.subheader("Impact Summary for the Past 12 Months")
