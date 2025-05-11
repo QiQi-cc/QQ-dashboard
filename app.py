@@ -18,6 +18,17 @@ df = pd.read_csv("cleaned_hope_data.csv")
 # Clean Pt State values
 df["Pt State"] = df["Pt State"].astype(str).str.upper().str.strip()
 df["Pt State"] = df["Pt State"].replace("NONE", "UNKNOWN")
+# Handle 'MISSING' and 'NAN' values
+df["Pt State"] = df["Pt State"].replace(["MISSING", "NAN"], "UNKNOWN")
+# Replace 'MISSING' and 'NAN' in other columns with pd.NA
+df.replace("MISSING", pd.NA, inplace=True)
+df.replace("NAN", pd.NA, inplace=True)
+# Fill missing 'Amount' values with the column's mean
+df['Amount'].fillna(df['Amount'].mean(), inplace=True)
+# Fill missing 'Pt State' values with the mode (most frequent value)
+df['Pt State'].fillna(df['Pt State'].mode()[0], inplace=True)
+# Save the cleaned data to a new CSV file
+df.to_csv('cleaned_hope_data_final.csv', index=False)
 
 # Title
 st.title("Hope Foundation Patient Assistance Dashboard")
