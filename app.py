@@ -73,7 +73,19 @@ st.subheader("Filtered Data Table")
 st.dataframe(filtered_df)
 
 #====================================================================================================================================
-# Step 1: Total Support by State and Gender
+# Step 1: Applications Ready for Review
+#========================================
+#Add a new section for application that are ready for review
+st.subheader("Applications Ready for Review")
+# Filter the dataset to only include applications where the 'Application signed? field is 'Yes'
+ready_apps = filtered_df[filtered_df["Application Signed?"] == "Yes"]
+# Display the total number of ready application
+st.write(f"Total Ready Applications: {len(ready_apps)}")
+#Display the list of ready applications in a table
+st.dataframe(ready_apps)
+
+#=======================================
+# Step 2: Total Support by State and Gender
 #========================================
 #Add a subheader for this section
 st.subheader("Total Support by State and Gender")
@@ -90,18 +102,6 @@ fig_demo = px.bar(
 #Display the chart
 st.plotly_chart(fig_demo)
 
-#=======================================
-# Step 2: Applications Ready for Review
-#========================================
-#Add a new section for application that are ready for review
-st.subheader("Applications Ready for Review")
-# Filter the dataset to only include applications where the 'Application signed? field is 'Yes'
-ready_apps = filtered_df[filtered_df["Application Signed?"] == "Yes"]
-# Display the total number of ready application
-st.write(f"Total Ready Applications: {len(ready_apps)}")
-#Display the list of ready applications in a table
-st.dataframe(ready_apps)
-
 #===================================================
 # Step 3: Patients Who Did Not Use Full Grant Amount
 #===================================================
@@ -114,30 +114,8 @@ st.write(f"Total Patients with Unused Grant Funds: {len(not_used_full)}")
 # Display the table of patients who did not fully use their grant
 st.dataframe(not_used_full)
 
-#===========================================
-# Step 4: Impact Summary for Past 12 Months
-#============================================
-# Add a subheader for this section
-st.subheader("Impact Summary for the Past 12 Months")
-# convert 'Grant Req Date' column to datetime format
-filtered_df["Grant Req Date"] = pd.to_datetime(filtered_df["Grant Req Date"], errors='coerce')
-# Filter records where Grant Req Date is within the past 12 months
-recent_12_months = filtered_df[filtered_df["Grant Req Date"] >= (pd.Timestamp.now() - pd.DateOffset(months=12))]
-# to numeric
-recent_12_months["Amount"] = pd.to_numeric(recent_12_months["Amount"], errors='coerce')
-# calculate summary metrics for the filtered data
-total_requests = len(recent_12_months)
-total_amount = recent_12_months["Amount"].sum()
-unique_patients = recent_12_months["Patient ID#"].nunique()
-avg_grant = total_amount / unique_patients if unique_patients > 0 else 0
-# Display the calculated metrics
-st.write(f"Total Requests in Past 12 Months: {total_requests}")
-st.write(f"Total Amount Granted: ${total_amount:,.2f}")
-st.write(f"Total Unique Patients: {unique_patients}")
-st.write(f"Average Grant per Patient: ${avg_grant:,.2f}")
-
 #===================================
-# Step 5: Time to Support Analysis
+# Step 4: Time to Support Analysis
 #====================================
 st.subheader("Time to Support Analysis")
 # Ensure the date columns are in datetime format
@@ -167,9 +145,31 @@ fig_time = px.histogram(
     title="Distribution of Time to Support (Days)"
 )
 st.plotly_chart(fig_time)
+
+#===========================================
+# Step 5: Impact Summary for Past 12 Months
+#============================================
+# Add a subheader for this section
+st.subheader("Impact Summary for the Past 12 Months")
+# convert 'Grant Req Date' column to datetime format
+filtered_df["Grant Req Date"] = pd.to_datetime(filtered_df["Grant Req Date"], errors='coerce')
+# Filter records where Grant Req Date is within the past 12 months
+recent_12_months = filtered_df[filtered_df["Grant Req Date"] >= (pd.Timestamp.now() - pd.DateOffset(months=12))]
+# to numeric
+recent_12_months["Amount"] = pd.to_numeric(recent_12_months["Amount"], errors='coerce')
+# calculate summary metrics for the filtered data
+total_requests = len(recent_12_months)
+total_amount = recent_12_months["Amount"].sum()
+unique_patients = recent_12_months["Patient ID#"].nunique()
+avg_grant = total_amount / unique_patients if unique_patients > 0 else 0
+# Display the calculated metrics
+st.write(f"Total Requests in Past 12 Months: {total_requests}")
+st.write(f"Total Amount Granted: ${total_amount:,.2f}")
+st.write(f"Total Unique Patients: {unique_patients}")
+st.write(f"Average Grant per Patient: ${avg_grant:,.2f}")
 #=======================================================================================================================================================================
 
-
+#Additional Visuals
 # plot 1 : amount by state
 st.subheader("Total Grant Amount by State")
 amount_by_state = filtered_df.groupby("Pt State")["Amount"].sum().reset_index()
