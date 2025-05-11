@@ -35,7 +35,12 @@ st.title("Hope Foundation Patient Assistance Dashboard")
 
 # Main KPIs
 total_requests = len(df)
-total_amount = pd.to_numeric(df["Amount"], errors='coerce').sum()
+# make sure 'Amount' as numeric
+df['Amount'] = pd.to_numeric(df['Amount'], errors='coerce')  
+# fill NaN value (average)
+df['Amount'].fillna(df['Amount'].mean(), inplace=True)  
+# sum
+total_amount = df['Amount'].sum()  
 unique_patients = df["Patient ID#"].nunique()
 
 # Display KPIs
