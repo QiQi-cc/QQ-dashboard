@@ -24,7 +24,8 @@ df["Pt State"] = df["Pt State"].replace(["MISSING", "NAN"], "UNKNOWN")
 df.replace("MISSING", pd.NA, inplace=True)
 df.replace("NAN", pd.NA, inplace=True)
 # Fill missing 'Amount' values with the column's mean
-df['Amount'].fillna(df['Amount'].mean(), inplace=True)
+df['Amount'] = pd.to_numeric(df['Amount'], errors='coerce')  
+df['Amount'].fillna(df['Amount'].mean(), inplace=True)  
 # Fill missing 'Pt State' values with the mode (most frequent value)
 df['Pt State'].fillna(df['Pt State'].mode()[0], inplace=True)
 # Save the cleaned data to a new CSV file
