@@ -53,7 +53,7 @@ filtered_df = df.copy()
 if state_filter:
     filtered_df = filtered_df[filtered_df["Pt State"].isin(state_filter)]
 if year_filter:
-    filtered_df = filtered_df[filtered_df["Application Year"].isin(year_filter)]
+    filtered_df = filtered_df[filtered_df["App Year"].isin(year_filter)]
 
 # ================== Support by Demographics ==================
 st.header("Total Support by State and Gender")
@@ -76,7 +76,7 @@ filtered_df['Days to Support'] = (filtered_df['Support Date'] - filtered_df['Req
 
 fig2 = px.box(
     filtered_df,
-    x="Application Year",
+    x="App Year",
     y="Days to Support",
     title="Time Between Request and Support by Year"
 )
@@ -93,10 +93,10 @@ st.plotly_chart(fig3, use_container_width=True)
 
 # ================== Conclusion / High-Level Summary ==================
 st.header("High-Level Impact Summary")
-total_per_year = filtered_df.groupby("Application Year")["Amount"].sum().reset_index()
+total_per_year = filtered_df.groupby("App Year")["Amount"].sum().reset_index()
 fig4 = px.line(
     total_per_year,
-    x="Application Year",
+    x="App Year",
     y="Amount",
     markers=True,
     title="Total Amount Granted Over Time"
