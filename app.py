@@ -37,6 +37,7 @@ st.title("Hope Foundation Patient Assistance Dashboard")
 total_requests = len(df)
 # make sure 'Amount' as numeric
 df['Amount'] = pd.to_numeric(df['Amount'], errors='coerce')  
+# fill NaN value (average)
 df['Amount'].fillna(df['Amount'].mean(), inplace=True)  
 # sum
 total_amount = df['Amount'].sum()  
