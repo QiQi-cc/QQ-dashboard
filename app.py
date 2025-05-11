@@ -106,7 +106,7 @@ st.plotly_chart(fig_demo)
 # Step 3: Patients Who Did Not Use Full Grant Amount
 #===================================================
 # Add a subheader for this section
-st.subheader("Patients Who Did Not Use Full Grant Amount")
+st.subheader("Patients with Remaining Balances")
 # Filter records where the Remaining balance column is greater that zero
 not_used_full = filtered_df[filtered_df["Remaining Balance"] > 0]
 #show total number of patients with remaining balances
