@@ -46,7 +46,8 @@ st.dataframe(ready_apps)
 # ================== Filter Options ==================
 st.sidebar.header("Filter Options")
 state_filter = st.sidebar.multiselect("Select States", options=df["Pt State"].unique())
-year_filter = st.sidebar.multiselect("Select Years", options=df["Application Year"].unique())
+year_filter = st.sidebar.multiselect("Select Years", options=df["App Year"].unique(), default=df["App Year"].unique())
+
 
 filtered_df = df.copy()
 if state_filter:
